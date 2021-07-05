@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+  <head>
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        display: flex;
+        height: 100vh;
+        flex-direction: column;
+      }
+      .menubar {
+        background-color: #1e88e5;
+      }
+      .editor {
+        flex-grow: 1;
+        background-color: #212121;
+        color: #fafafa;
+      }
+      .center {
+        text-align: center;
+      }
+      .statusbar {
+        background-color: #388e3c;
+      }
+    </style>
+    <link rel="stylesheet" href="node_modules/xterm/css/xterm.css" />
+    <script src="node_modules/xterm/lib/xterm.js"></script>
+    <script src="node_modules/xterm-addon-fit/lib/xterm-addon-fit.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="menubar">
+        <div class="center">xterm.js-example</div>
+      </div>
+      <div class="editor">Main editor</div>
+      <div id="terminal"></div>
+      <div class="statusbar">
+        <div class="center">status bar</div>
+      </div>
+    </div>
+    <script>
+      // Use `rows` to define terminal height. If you use the CSS style height,
+      // there may be some space not filled. (if the space cannot fit one more row)
+      var term = new Terminal({"rows": 10});
+      var fitAddon = new FitAddon.FitAddon();
+      term.loadAddon(fitAddon);
+      term.open(document.getElementById('terminal'));
+      fitAddon.fit();
+      term.write('Hello from \x1B[1;3;31mxterm.js\x1B[0m \r\n$ ')
+      term.onKey(e => {
+        term.write(e.key);
+        if (e.key == '\r')
+          term.write('\n$ ');
+      })
+      window.onresize = () => {
+        // The fitAddon is necessary for window resize
+        fitAddon.fit();
+      };
+    </script>
+  </body>
+</html>
