@@ -2,6 +2,12 @@
 
 A minimal example for demonstrating using [xterm.js](https://github.com/xtermjs/xterm.js/) in an embedded fashion. (support window resize)
 
+Online Demo: https://j3soon.github.io/xterm.js-embedded-example/
+
+## Screenshot
+
+[![](demo.png)](https://j3soon.github.io/xterm.js-embedded-example/)
+
 ## Set up
 
 ```sh
